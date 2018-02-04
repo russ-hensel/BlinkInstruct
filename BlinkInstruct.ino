@@ -2,15 +2,11 @@
 //      Rewrite of classic blink example to inclued a serail command interface and some other "tricks "
 //
 //      Features
-//           moving from experimenting to a production clock more compound commands 
-//
-// History/Status:  ( most recent at top ** done !! pending )
-//        Summary:  Ver5   add a tweak to the stepper position and enhance/refine the chimes
+//           instructional also see readme.h
 //          
 //
 // Author:      russ_hensel http://www.opencircuits.com/User:Russ_hensel
-//    uses library at:            
-//      xxx
+//
 // ============================= use .h files for easy modification using #define 's ================================
 
 #include "BlinkInstruct.h"    // #defines for this project
@@ -19,9 +15,7 @@
 // ============================= globals variables ... ========
 
 SerialCmd    serialCmd;        // my version of serial interface, use it or something else that is more standard 
-
-long         blinkDelay;
-
+long         blinkDelay;       // used to vary blink speed 
 
 // ----------------------------------------------------------------
 // help just a little intro for the program -- summary of commands and version 
@@ -42,6 +36,7 @@ void loop()   {
     
     unsigned char   cmdChar;
     long            cmdNbr;
+    
     serialCmd.tryRecCmd( );
 
     if ( serialCmd.gotCmd  )   {
@@ -103,9 +98,9 @@ void finiteBlink( long max_loop ) {
 // to let you set the speed at run time 
 void newBlink( ) {
     digitalWrite( MY_LED_PIN, HIGH );   // turn the LED on (HIGH is the voltage level)
-    delay( blinkDelay );                       // wait for a second
+    delay( blinkDelay );                 
     digitalWrite( MY_LED_PIN, LOW );    // turn the LED off by making the voltage LOW
-    delay( blinkDelay );                       // wait for a second
+    delay( blinkDelay );                
 }
 
 // ------------------------------------------------------

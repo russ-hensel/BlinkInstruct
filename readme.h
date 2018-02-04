@@ -1,12 +1,16 @@
 readme.h   here be some doc and pferhaps some old dead code for reference 
 
+This file is for documentation, it is not compiled despite the .h extension 
  
 Status:
 
-    Done untill new ideas come along if ever
+    Mostly done untill new ideas come along if ever
+    Needs test 
     Published at:
-        Instructables
-        GitHub 
+        Instructables  ... not yet 
+        GitHub         https://github.com/russ-hensel/BlinkInstruct
+        Open Circuits  http://www.opencircuits.com/Smarter_Arduino_Programming_-_Tips_and_Tricks
+        
  
 Compile info
             

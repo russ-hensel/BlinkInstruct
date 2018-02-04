@@ -98,39 +98,7 @@ bool   SerialCmd::doneNext(  )  {
   return done_getNext;
 }
 
-//// ---------- begin subroutine working nov 2017 do new to manage negs, change to long ----------
-//// get next numeric value for now only pos ints, could peel off a string value and use libe to convert
-//// x11 22 333 4 5######
-//// x11 22 333 4 5 ######
-//// x 11 22 333 4 5###### ... are all valid note problems at begin and end  
-//// x with no numbers ???
-//// for now do not allow trailing blanks which would require look ahead which we could do 
-//int   SerialCmd::getNext(  )  {
-//     int   val;
-//     char  a_char;
-//     val           = 0;
-//     done_getNext  = false;
-//     while ( true ) {
-//         // do deal with 2 blanks need to know if we have started converting val == 0 not a good test add a flag??
-//         ix_getNext ++;
-//         a_char = cmdPrior[ ix_getNext ];
-//         if(  a_char == 0 ) {   // null we are done
-//             done_getNext  = true;
-//             //Serial.print( "done at ix_getNext = "  );
-//             //Serial.println( ix_getNext );
-//             return val;
-//         }
-//         else if  ( a_char == CHAR_SP ) {
-//             // if ( val != 0 ) {
-//             // and go ahead then back up one 
-//             return val;
-//         }
-//         else {
-//            val  = ( val * 10 ) + ( a_char - 48 );
-//         }
-//    }
-//    return val;
-//}
+
 
 // ---------- begin subroutine working nov 2017 do new to manage negs, change to long ----------
 // get next numeric value for now only pos ints, could peel off a string value and use libe to convert
