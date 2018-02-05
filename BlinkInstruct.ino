@@ -18,8 +18,8 @@ SerialCmd    serialCmd;        // my version of serial interface, use it or some
 long         blinkDelay;       // used to vary blink speed 
 
 // ----------------------------------------------------------------
-// help just a little intro for the program -- summary of commands and version 
 void rptHelp( void ) {  
+//  help just a little intro for the program -- summary of commands and version 
     Serial.println( F( "" ) );
     Serial.print(   F( "Arduino:  " ) );  
     Serial.println( VERSION_ID  );   
@@ -27,6 +27,7 @@ void rptHelp( void ) {
     Serial.println( F( "d nn    Set delay" ) );             // void setDelay( long delay )   {
     Serial.println( F( "f nn    Finite blink" ) );          // void finiteBlink( max_loop ) {
     Serial.println( F( "h       High speed blink" ) );      // void highSpeedBlink( ) {
+    Serial.println( F( "n       New blink" ) );             // void newBlink( ) {
     Serial.println( F( "v       Version of software" ) );   // void rptVersion( )
     Serial.println( F( "?       Help" ) );                  // void rptHelp( )
 }
@@ -57,7 +58,10 @@ void loop()   {
             break;   
         case 'h':  //     
             highSpeedBlink();
-            break;                                                 
+            break;   
+         case 'n':  //                                                                   case 'h':  //     
+            newBlink();
+            break;       
          case 'v':   
             rptVersion();
             break;             
@@ -66,7 +70,7 @@ void loop()   {
             break;                                     
         default:
             Serial.print( F( "!Bad Command = " ) );
-            Serial.println( cmdChar );
+            Serial.println( char(cmdChar) );
         } 
         Serial.println( F( "ok"  ) );
         serialCmd.gotCmd    = 0;
@@ -74,17 +78,18 @@ void loop()   {
 }
 
 // ------------------------------------------------------
-// the loop function runs over and over again forever -- revised from the original blink example 
-// to let you set the speed at run time 
 void highSpeedBlink( ) {
-  digitalWrite( MY_LED_PIN, HIGH );   // turn the LED on (HIGH is the voltage level)                  
-  digitalWrite( MY_LED_PIN, LOW );    // turn the LED off by making the voltage LOW        
+//  fastest blink -- unless you get tricky
+    while ( true ) { 
+        digitalWrite( MY_LED_PIN, HIGH );   // turn the LED on (HIGH is the voltage level)                  
+        digitalWrite( MY_LED_PIN, LOW );    // turn the LED off by making the voltage LOW       
+    } 
 }
 
 // ------------------------------------------------------
-// this loop runs for a finite time as specified in max_loop
-// speed set via blinkDelay
 void finiteBlink( long max_loop ) {
+//  this loop runs for a finite time as specified in max_loop
+//  speed set via blinkDelay  
     for ( int ix  = 1;   ix <= max_loop;  ix ++ ) { 
         digitalWrite( MY_LED_PIN, HIGH );   // turn the LED on (HIGH is the voltage level)
         delay( blinkDelay );                  
@@ -94,26 +99,31 @@ void finiteBlink( long max_loop ) {
 }
 
 // ------------------------------------------------------
-// the loop function runs over and over again forever -- revised from the original blink example 
-// to let you set the speed at run time 
 void newBlink( ) {
-    digitalWrite( MY_LED_PIN, HIGH );   // turn the LED on (HIGH is the voltage level)
-    delay( blinkDelay );                 
-    digitalWrite( MY_LED_PIN, LOW );    // turn the LED off by making the voltage LOW
-    delay( blinkDelay );                
+//  revised from the original blink example to let you set the speed at run time   
+    while ( true ) { 
+        digitalWrite( MY_LED_PIN, HIGH );   // turn the LED on (HIGH is the voltage level)
+        delay( blinkDelay );                 
+        digitalWrite( MY_LED_PIN, LOW );    // turn the LED off by making the voltage LOW
+        delay( blinkDelay );  
+    }              
 }
 
 // ------------------------------------------------------
-// the loop function runs over and over again forever -- from the original blink example 
+
 void classicBlink( ) {
-    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-    delay(1000);                       // wait for a second
-    digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-    delay(1000);                       // wait for a second
+//  from the original blink example 
+    while ( true ) { 
+        digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+        delay(1000);                       // wait for a second
+        digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+        delay(1000);                       // wait for a second
+    }
 }
 
 // ------------------------------------------------------
 void setDelay( long delay )   {
+//  sets the blink delay  
     blinkDelay  = delay;
     Serial.print( F( "delay = " ) );
     Serial.println( blinkDelay );
